@@ -9,9 +9,9 @@ class Command(BaseCommand):
 
     @staticmethod
     def json_read_categories():
-        ''' Метод распаковки json-файла и сохранения в новый список для дальнейшей работы'''
+        """ Метод распаковки json-файла и сохранения в новый список для дальнейшей работы"""
         categories_list = []
-        with open('catalog/fixtures/category.json', 'r') as f:
+        with open('catalog/fixtures/category.json', 'r', encoding="utf-8") as f:
             file = json.load(f)
 
             for item in file:
@@ -20,9 +20,9 @@ class Command(BaseCommand):
 
     @staticmethod
     def json_read_products():
-        ''' Метод распаковки json-файла и сохранения в новый список для дальнейшей работы'''
+        """ Метод распаковки json-файла и сохранения в новый список для дальнейшей работы"""
         products_list = []
-        with open('catalog/fixtures/products.json', 'r') as f:
+        with open('catalog/fixtures/products.json', 'r', encoding="utf-8") as f:
             file = json.load(f)
 
             for item in file:
