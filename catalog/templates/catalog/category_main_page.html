@@ -1,0 +1,22 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<ul>
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for category in category_list %}
+        <div class="col-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{ category.name }}</h4>
+                    <p class="card-text" data-auto="snippet title">
+                        {{ category.description|truncatechars:25 }}
+                    </p>
+                    <a href="{% url 'catalog:category_one' category.pk %}" class="btn btn-link">Перейти</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</ul>
+{% endblock %}
