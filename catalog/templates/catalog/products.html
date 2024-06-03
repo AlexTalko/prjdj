@@ -14,7 +14,7 @@
                             {{ product.description }}
                         <h6 class="text">Цена: {{ product.price }} рублей.</h6>
                         </p>
-                        <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Подробнее</a>
+                        <a class="btn btn-primary" href="{% url 'catalog:prod_info' product.pk %}" role="button">Подробнее</a>
                     </div>
                 </div>
             </div>
