@@ -1,9 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from catalog.models import Category, Product
 
-from django.shortcuts import render, get_object_or_404
-from catalog.models import Category, Product
-
 
 def contacts(request):
     if request.method == "POST":
@@ -53,4 +50,4 @@ def product_detail(request, pk):
         'title': f'{product_one.name}',
 
     }
-    return render(request, 'catalog/product_detail.html', context)
+    return render(request, 'catalog/prod_info.html', context)
