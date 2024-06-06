@@ -10,7 +10,7 @@
                 <div class="card-body text-center">
                     <h4 class="card-title">{{ category.name }}</h4>
                     <p class="card-text" data-auto="snippet title">
-                        {{ category.description|truncatechars:25 }}
+                        {{ category.description|truncatechars:100 }}
                     </p>
                     <a href="{% url 'catalog:category_one' category.pk %}" class="btn btn-link">Перейти</a>
                 </div>
