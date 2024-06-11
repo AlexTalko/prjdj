@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="font-weight-bold">Категории</h1>
+        </div>
+    </div>
+</section>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <ul>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {% for category in object_list %}
+                    <div class="col-4">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-body text-center">
+                                <h4 class="card-title">{{ category.name }}</h4>
+                                <p class="card-text" data-auto="snippet title">
+                                    {{ category.description|truncatechars:100 }}
+                                </p>
+                                <a href="{% url 'catalog:category_detail' category.pk %}" class="btn btn-link">Перейти</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+        </ul>
+    </div>
+</div>
+{% endblock %}
