@@ -1,0 +1,31 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="font-weight-bold">{{ object.name }}</h1>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+            <div class="card">
+                <img src="{{ object.image | media_filter }}">
+                <div class="card-body">
+                    <h4 class="card-title">{{ object.name }}</h4>
+                    <p class="card-text">
+                        {{ object.description }}
+                    <h6 class="text">Цена: {{ object.price }} рублей.</h6>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<a style="text-align:center" href="{% url 'catalog:category_list' %}" role="button">Назад в категории</a>
+</div>
+
+
+
+{% endblock %}
