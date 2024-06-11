@@ -1,0 +1,41 @@
+{% extends 'catalog/base.html'%}
+{% load my_tags %}
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="font-weight-bold">{{ object.title }}</h1>
+        </div>
+    </div>
+</section>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {{ object.title }} ({{ object.slug }})
+                        </h4>
+                        <p class="card-text">
+                            {{ object.body }}
+                        </p>
+                        <p class="font-italic">{{ object.created_at }}</p>
+                    </div>
+                    <div class="card-footer">
+                        Просмотры {{ object.views_count }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <img src="{{ object.image | media_filter }}">
+                </div>
+            </div>
+        </div>
+        <div class="col mb-5">
+            <a class="btn btn-outline-secondary" href="{% url 'blog:list' %}" role="button">Назад</a>
+        </div>
+
+    </div>
+{% endblock %}
