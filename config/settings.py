@@ -58,9 +58,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'builtins': [
-                'catalog.templates.templatetags.my_tags',
-            ]
+            # 'builtins': [
+            #     'catalog.templates.templatetags.my_tags',
+            # ]
         },
     },
 ]
@@ -69,7 +69,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'catalog',
         'USER': 'postgres',
         'PASSWORD': '4596',
