@@ -18,10 +18,10 @@
                 <div class="card-body">
                     <h4 class="card-title">{{ category.name }}</h4>
                     <p class="card-text">
-                        {{ category.description }}
+                        {{ category.description|truncatechars:100  }}
                     <h6 class="text">Цена: {{ category.price }} рублей.</h6>
                     </p>
-                    <a class="btn btn-primary" href="{% url 'catalog:products' category.pk %}" role="button">Подробнее</a>
+                    <a class="btn btn-primary" href="{% url 'catalog:product_detail' category.pk %}" role="button">Подробнее</a>
                 </div>
             </div>
         </div>
