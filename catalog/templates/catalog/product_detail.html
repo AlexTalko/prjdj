@@ -20,12 +20,18 @@
                     <h4 class="text">Цена: {{ object.price }} рублей.</h4>
                     </p>
                 </div>
+                {% for version in object.version_product.all %}
+                <div class="card-footer">
+                    Версия: {{ version.number_version }} / {{ version.name_version }}
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
-<a style="text-align:center" href="{% url 'catalog:category_detail' object.category.pk  %}" role="button">Назад в категорию</a>
 </div>
-
+<a style="text-align:center" href="{% url 'catalog:category_detail' object.category.pk  %}" role="button">Назад в
+    категорию</a>
+</div>
 
 
 {% endblock %}

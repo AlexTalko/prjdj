@@ -26,13 +26,16 @@
                     <h6 class="text">Цена: {{ category.price }} рублей.</h6>
                     </p>
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' category.pk %}" role="button">Подробнее</a>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_update' category.pk %}" role="button">Редактировать</a>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_delete' category.pk %}" role="button">Удалить</a>
-
+                    <a class="btn btn-warning" href="{% url 'catalog:product_update' category.pk %}" role="button">Редактировать</a>
+                    <a class="btn btn-danger" href="{% url 'catalog:product_delete' category.pk %}" role="button">Удалить</a>
                 </div>
+                {% for version in category.version_product.all %}
+                <div class="card-footer">Версия: {{ version.number_version }} / {{ version.name_version }}</div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
     </div>
-    <a style="text-align:center" href="{% url 'catalog:category_list' %}" role="button">Назад в категории</a>
-    {% endblock %}
+    {% endfor %}
+</div>
+<a style="text-align:center" href="{% url 'catalog:category_list' %}" role="button">Назад в категории</a>
+{% endblock %}
