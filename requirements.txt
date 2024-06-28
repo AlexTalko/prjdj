@@ -4,7 +4,7 @@ black==24.4.2
 click==8.1.7
 colorama==0.4.6
 decorator==5.1.1
-Django==5.0.6
+Django==4.2.13
 executing==2.0.1
 ipython==8.24.0
 jedi==0.19.1
