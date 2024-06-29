@@ -1,45 +1,60 @@
 {% extends 'catalog/base.html' %}
-{% block content %}
 
-<div class="container">
-    <form class="row" method="post" enctype="multipart/form-data">
-        <div class="col-6">
-            <div class="card">
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="font-weight-bold">
                 {% if object %}
-                <p class="card-text">Редактирование</p>
+                Редактирование
                 {% else %}
-                <p class="card-text">Создать</p>
+                Создание
                 {% endif %}
-                <div class="card-body">
-                    {% csrf_token %}
-                    {{ form.as_p }}
+            </h1>
+        </div>
+    </div>
+</section>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <form class="row" method="post" enctype="multipart/form-data">
+            <div class="col-6 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">
+                            {% if object %}
+                            Сохранить
+                            {% else %}
+                            Создать
+                            {% endif %}
+                        </button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">
-                    {% if object %}
-                    Сохранить
-                    {% else %}
-                    Создать
-                    {% endif %}
-                </button>
             </div>
-        </div>
-        <div class="col-6">
-            <div class="card">
-                <p class="card-text">Версия {{ object.name }}
-                </p>
-                {{ formset.management_form }}
-                {% for form in formset.forms %}
-                {{ form.as_p }}
-                {% if not forloop.last %}
-                <hr>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </form>
+            <div class="col-6 mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">Версия {{ object.name }}
+                        </p>
+                        {{ formset.management_form }}
+                        {% for form in formset.forms %}
+                        {{ form.as_p }}
+                         {% if not forloop.last %}
+                        <hr>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+        </form>
+    </div>
+    {% if object %}
+    <div class="col">
+        <a class="btn btn-outline-secondary" href="{% url 'catalog:category_list'  %}" role="button">Назад</a>
+    </div>
+    {% endif %}
 </div>
-<div class="container">
-    <a class="btn btn-success" href="{% url 'catalog:category_list' %}" role="button">Отменить</a>
-</div>
+
+
 
 {% endblock %}
