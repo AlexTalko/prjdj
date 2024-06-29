@@ -59,7 +59,7 @@ class Version(models.Model):
     number_version = models.CharField(default=0, verbose_name="Номер версии")
     name_version = models.CharField(max_length=100, verbose_name="Название версии")
     is_current = models.BooleanField(
-        default=True, verbose_name="Признак текущей версии"
+        default=False, verbose_name="Признак текущей версии"
     )
 
     def __str__(self):

@@ -21,9 +21,11 @@
                     </p>
                 </div>
                 {% for version in object.version_product.all %}
+                {% if version.is_current %}
                 <div class="card-footer">
                     Версия: {{ version.number_version }} / {{ version.name_version }}
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

@@ -36,11 +36,10 @@
                 {% endfor %}
             </div>
         </div>
-
     </form>
 </div>
 <div class="container">
-    <a class="btn btn-success" href="{% url 'catalog:category_detail' object.category.pk %}" role="button">Отменить</a>
+    <a class="btn btn-success" href="{% url 'catalog:category_list' %}" role="button">Отменить</a>
 </div>
 
 {% endblock %}

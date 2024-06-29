@@ -16,7 +16,7 @@
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for category in object.products.all %}
-        <div class="col-4">
+        <div class="col">
             <div class="card mb-4 box-shadow">
                 <img src="{{ category.image | media_filter }}">
                 <div class="card-body">
@@ -26,7 +26,9 @@
                     <h6 class="text">Цена: {{ category.price }} рублей.</h6>
 
                     {% for version in category.version_product.all %}
-                    <div class="card">Версия: {{ version.number_version }} / {{ version.name_version }}</div>
+                        {% if version.is_current %}
+                            <div class="card">Версия: {{ version.number_version }} / {{ version.name_version }}</div>
+                        {% endif %}
                     {% endfor %}
                     </p>
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' category.pk %}" role="button">Подробнее</a>
@@ -35,8 +37,9 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+
+    <a style="text-align:center" href="{% url 'catalog:category_list' %}" role="button">Назад в категории</a>
 </div>
-<a style="text-align:center" href="{% url 'catalog:category_list' %}" role="button">Назад в категории</a>
 {% endblock %}
