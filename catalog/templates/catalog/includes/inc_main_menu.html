@@ -4,19 +4,20 @@
             <div class="row">
                 <div class="col-sm-4 offset-md-1 py-4">
                 </div>
-                <div class="col-sm-4 offset-md-1 py-4">
-                    <li><a href="{% url 'catalog:category_list' %}" class="text-white">Главная</a></li>
+                <div class="col-sm-4 offset-md-1 py-4 navbar">
 
 
-                    <ul class="col-sm-4 offset-md-1 py-4">
+                    <ul class="col-sm-4 offset-md-1 py-4 navbar-nav float-end">
+                        <li class="nav-item"><a href="{% url 'catalog:category_list' %}" class="text-white">Главная</a></li>
+
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'users:logout' %}" class="text-white">Выход</a></li>
+                        <li class="nav-item"><a href="{% url 'users:logout' %}" class="text-white">Выход</a></li>
                         {% else %}
-                        <li><a href="{% url 'users:login' %}" class="text-white">Вход</a></li>
-                        <li><a href="{% url 'users:register' %}" class="text-white">Зарегистрироваться</a></li>
+                        <li class="nav-item"><a href="{% url 'users:login' %}" class="text-white">Вход</a></li>
+                        <li class="nav-item"><a href="{% url 'users:register' %}" class="text-white">Зарегистрироваться</a></li>
                         {% endif %}
-                        <li><a href="{% url 'blog:list' %}" class="text-white">Статьи</a></li>
-                        <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
+                        <li class="nav-item"><a href="{% url 'blog:list' %}" class="text-white">Статьи</a></li>
+                        <li class="nav-item"><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
 
                     </ul>
                 </div>
