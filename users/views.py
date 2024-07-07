@@ -3,6 +3,7 @@ import string
 import random
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -34,10 +35,11 @@ class UserCreateView(CreateView):
             from_email=EMAIL_HOST_USER,
             recipient_list=[user.email],
         )
+        messages.success(self.request, 'На вашу почту отправлено письмо с подтверждением.')
         return super().form_valid(form)
 
 
-class UserUpdate(UpdateView):
+class UserUpdate(LoginRequiredMixin, UpdateView):
     model = User
     success_url = reverse_lazy('users:profile')
     form_class = UserProfileForm
@@ -50,6 +52,7 @@ def email_verification(request, token):
     user = get_object_or_404(User, token=token)
     user.is_active = True
     user.save()
+    messages.success(request, 'Ваша почта подтверждена. Теперь вы можете войти.')
     return redirect(reverse('users:login'))
 
 

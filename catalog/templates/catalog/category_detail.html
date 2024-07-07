@@ -12,7 +12,9 @@
 
 <div class="container">
     <div class="col-12 mb-5">
+        {% if perms.catalog.add_product %}
         <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}">Добавить товар</a>
+        {% endif %}
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for category in object.products.all %}
@@ -32,8 +34,12 @@
                     {% endfor %}
                     </p>
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' category.pk %}" role="button">Подробнее</a>
+                    {% if perms.catalog.change_product %}
                     <a class="btn btn-warning" href="{% url 'catalog:product_update' category.pk %}" role="button">Редактировать</a>
+                    {% endif %}
+                    {% if perms.catalog.delete_product %}
                     <a class="btn btn-danger" href="{% url 'catalog:product_delete' category.pk %}" role="button">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
