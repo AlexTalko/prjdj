@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Category, Product, Version
 
 
@@ -34,7 +35,7 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     success_url = reverse_lazy('catalog:category_detail')
 
 
-class ProductCreateView(LoginRequiredMixin,  PermissionRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     permission_required = 'catalog.add_product'
@@ -48,7 +49,7 @@ class ProductCreateView(LoginRequiredMixin,  PermissionRequiredMixin, CreateView
         return super().form_valid(form)
 
 
-class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     permission_required = 'catalog.change_product'
@@ -78,8 +79,19 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
         else:
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
+    def get_form_class(self):
+        permission_required = ['catalog.can_edit_description',
+                               'catalog.can_cancel_publishing',
+                               'catalog.can_change_category',]
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductForm
+        elif [user.has_perm(i for i in permission_required)]:
+            return ProductModeratorForm
+        raise PermissionDenied
 
-class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:category_list')
     permission_required = 'catalog.delete_product'

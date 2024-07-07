@@ -34,10 +34,9 @@
                     {% endfor %}
                     </p>
                     <a class="btn btn-primary" href="{% url 'catalog:product_detail' category.pk %}" role="button">Подробнее</a>
-                    {% if perms.catalog.change_product %}
+                    {% if perms.catalog.can_edit_description and perms.catalog.can_cancel_publishing and perms.catalog.can_change_category or user == category.owner%}
                     <a class="btn btn-warning" href="{% url 'catalog:product_update' category.pk %}" role="button">Редактировать</a>
-                    {% endif %}
-                    {% if perms.catalog.delete_product %}
+
                     <a class="btn btn-danger" href="{% url 'catalog:product_delete' category.pk %}" role="button">Удалить</a>
                     {% endif %}
                 </div>

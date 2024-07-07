@@ -6,7 +6,6 @@ NULLABLE = {"blank": True, "null": True}
 
 
 class Product(models.Model):
-
     name = models.CharField(max_length=100, verbose_name="Наименование")
     description = models.TextField(verbose_name="Описание")
     image = models.ImageField(
@@ -28,6 +27,7 @@ class Product(models.Model):
 
     owner = models.ForeignKey(User, verbose_name="Продавец", help_text="Укажите продавца товара", blank=True, null=True,
                               on_delete=models.SET_NULL)
+    is_published = models.BooleanField(default=False, verbose_name="Опубликовано")
 
     def __str__(self):
         return f"{self.name}, {self.description}, {self.price}"
@@ -36,10 +36,14 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name", "price"]
+        permissions = [
+            ("can_edit_description", "Может менять описание продукта"),
+            ("can_cancel_publishing", "Может отменять публикацию продукта"),
+            ("can_change_category", "Может менять категорию продукта")
+        ]
 
 
 class Category(models.Model):
-
     name = models.CharField(max_length=100, verbose_name="Наименование")
     description = models.TextField(verbose_name="Описание")
 
@@ -57,7 +61,7 @@ class Version(models.Model):
         on_delete=models.SET_NULL,
         **NULLABLE,
         verbose_name="Продукт",
-        related_name="version_product",)
+        related_name="version_product", )
 
     number_version = models.CharField(default=0, verbose_name="Номер версии")
     name_version = models.CharField(max_length=100, verbose_name="Название версии")
