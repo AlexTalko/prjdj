@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Category, Product, Version
+from catalog.services import get_category_list_from_cache
 
 
 class ContactsTemplateView(TemplateView):
@@ -20,6 +21,9 @@ class ContactsTemplateView(TemplateView):
 
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
+
+    def get_queryset(self):
+        return get_category_list_from_cache()
 
 
 class CategoryDetailView(LoginRequiredMixin, DetailView):
